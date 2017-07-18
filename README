@@ -1,7 +1,9 @@
-This is a mirror of http://www.vim.org/scripts/script.php?script_id=1457
+This is a folk from vim-script/CycleColor, which is a mirror of http://www.vim.org/scripts/script.php?script_id=1457
 
-This script provides a function, CycleColor (which is mapped to F4), to cycle through (almost) all available colorschemes.  It includes colorschemes from all \"colors\" subdirectories in the runtimepath.
+This script provides a function, CycleColor (which is mapped to F4), to cycle through (almost) all available colorschemes. 
 
 Because the script uses \":colorscheme\" rather than \":source\" to set the colorscheme, if there are two files with the same name in different directories in rtp, only the first one will be used (thus \"almost\" above).
 
-The script was inspired by a one-liner by Tim Chase.
+The original version hard coded the search directory for colorschemes, i.e., ~/.vim/colors.
+Due to the common use of vim plugin managers, colorschemes do not always reside in this dir. 
+This folk version modified the script to search for a 'colors' subdir inside ~/.vim and use the first found subdir as the search directory for colorschemes.
