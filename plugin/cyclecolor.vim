@@ -54,11 +54,14 @@
 " I also avoided using vim 7 lists so this script can be used with
 " version 6.
 "
-" TODO:  Allow selecting the scheme from a list (like csExplorer.vim).
-"        Notification of same-named schemes in different directories.
-"        Allow blacklisting specific colorscheme files.
+" Modification:
+" by mohellen, 2017 Jul 19
+" Due to the use of vim plugin manager, color scheme files are no longer in ~/.vim/colors
+" This change allows automatic search for the 'colors' subdir in ~/.vim
+" and use the first found ~/.vim/somepath/colors subdir
 
-let s:schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+let s:colorsdir = split(system("find $HOME/.vim -type d -name colors"), '\n')[0]
+let s:schemes = "\n".globpath(s:colorsdir, "*.vim")."\n"
 let s:currentfile = ""
 let s:currentname = ""
 
@@ -112,7 +115,7 @@ function! s:CycleColor(direction)
 endfunction
 
 function! s:CycleColorRefresh()
-	let s:schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+	let s:schemes = "\n".globpath(s:colorsdir, "*.vim")."\n"
 endfunction
 
 command! CycleColorNext :call s:CycleColor(1)
